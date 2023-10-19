@@ -165,7 +165,7 @@ def train(model: torch.nn.Module,
             f"train_acc: {train_acc:.4f} | "
             f"val_loss: {val_loss:.4f} | "
             f"val_acc: {val_acc:.4f} | "
-            f"lr: {val_acc:.6f} | " 
+            f"lr: {optimizer.param_groups[-1]['lr']:.6f} | " 
         )
 
         # Save best model
