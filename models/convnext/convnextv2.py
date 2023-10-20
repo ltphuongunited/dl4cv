@@ -118,38 +118,43 @@ model_urls = {
     }
 
 
-def convnextv2_atto(pretrained=False, **kwargs):
+def convnextv2_atto(pretrained=False,num_classes=1000, **kwargs):
     model = ConvNeXtV2(depths=[2, 2, 6, 2], dims=[40, 80, 160, 320], **kwargs)
     if pretrained:
         checkpoint = torch.hub.load_state_dict_from_url(url=model_urls['atto'], map_location="cpu")
         model.load_state_dict(checkpoint["model"])
+        model.head = nn.Linear(320, num_classes)
     return model
-def convnextv2_femto(pretrained=False, **kwargs):
+def convnextv2_femto(pretrained=False, num_classes=1000, **kwargs):
     model = ConvNeXtV2(depths=[2, 2, 6, 2], dims=[48, 96, 192, 384], **kwargs)
     if pretrained:
         checkpoint = torch.hub.load_state_dict_from_url(url=model_urls['femto'], map_location="cpu")
         model.load_state_dict(checkpoint["model"])
+        model.head = nn.Linear(384, num_classes)
     return model
 
-def convnext_pico(pretrained=False, **kwargs):
+def convnextv2_pico(pretrained=False, num_classes=1000, **kwargs):
     model = ConvNeXtV2(depths=[2, 2, 6, 2], dims=[64, 128, 256, 512], **kwargs)
     if pretrained:
         checkpoint = torch.hub.load_state_dict_from_url(url=model_urls['pico'], map_location="cpu")
         model.load_state_dict(checkpoint["model"])
+        model.head = nn.Linear(512, num_classes)
     return model
 
-def convnextv2_nano(pretrained=False, **kwargs):
+def convnextv2_nano(pretrained=False, num_classes=1000, **kwargs):
     model = ConvNeXtV2(depths=[2, 2, 8, 2], dims=[80, 160, 320, 640], **kwargs)
     if pretrained:
         checkpoint = torch.hub.load_state_dict_from_url(url=model_urls['nano'], map_location="cpu")
         model.load_state_dict(checkpoint["model"])
+        model.head = nn.Linear(640, num_classes)
     return model
 
-def convnextv2_tiny(pretrained=False, **kwargs):
+def convnextv2_tiny(pretrained=False, num_classes=1000, **kwargs):
     model = ConvNeXtV2(depths=[3, 3, 9, 3], dims=[96, 192, 384, 768], **kwargs)
     if pretrained:
         checkpoint = torch.hub.load_state_dict_from_url(url=model_urls['tiny'], map_location="cpu")
         model.load_state_dict(checkpoint["model"])
+        model.head = nn.Linear(768, num_classes)
     return model
 
 def convnextv2_base(pretrained=False, **kwargs):
